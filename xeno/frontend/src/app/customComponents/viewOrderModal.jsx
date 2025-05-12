@@ -13,8 +13,8 @@ export default function ViewOrderModal({ open, onClose, order }) {
         <div className="space-y-2 text-sm">
           <p><strong>Date:</strong> {new Date(order.orderDate).toLocaleString()}</p>
           <p><strong>Total Amount:</strong> ₹{order.totalAmount}</p>
-          <p><strong>Status:</strong> {order.status}</p>
-          <p><strong>Payment Method:</strong> {order.paymentMethod}</p>
+          <p><strong>Status:</strong> {order.orderStatus}</p>
+          <p><strong>Shipping Address:</strong> {order.shippingAddress}</p>
           {/* Add more order fields if needed */}
         </div>
       </DialogContent>

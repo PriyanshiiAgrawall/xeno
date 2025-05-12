@@ -2,7 +2,7 @@ import Customer from "../models/customer.js";
 import Order from "../models/order.js";
 import Campaign from "../models/Campaign.js";
 import CommunicationLog from "../models/CommunicationLog.js";
-import { generateSummaryMessage } from "./aiSuggestionController.js";
+import generateSummaryMessage from "../lib/summaryMessage.js";
 
 
 
@@ -267,29 +267,28 @@ export const createCampaign = async (req, res) => {
     try {
       const communicationLogs = [];
       for (const customer of matchingCustomers) {
-        const personalizedMessage = message.includes("{{name}}")
+  const personalizedMessage = message.includes("{{name}}")
     ? message.replace("{{name}}", customer.name)
     : message;
-        const log = new CommunicationLog({
-          customer: customer._id,
-          campaign: campaign._id,
-          message: personalizedMessage,
-          status: 'pending'
-        });
-        await log.save();
-        communicationLogs.push(log._id);
-      }
 
-      
-      campaign.communicationLogs = communicationLogs;
-      await campaign.save();
-      await customer.findByIdAndUpdate(customer._id, {
-        $push: {
-          campaigns: campaign._id,
-          communicationLogs: log._id,
-        },
-      });
-    
+  const log = new CommunicationLog({
+    customer: customer._id,
+    campaign: campaign._id,
+    message: personalizedMessage,
+    status: 'pending'
+  });
+
+  await log.save();
+  communicationLogs.push(log._id);
+
+  
+  await Customer.findByIdAndUpdate(customer._id, {
+    $push: {
+      campaigns: campaign._id,
+      communicationLogs: log._id,
+    },
+  });
+}
 
       // Update customers with campaign reference
       await Customer.updateMany(

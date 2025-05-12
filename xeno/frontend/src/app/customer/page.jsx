@@ -70,13 +70,7 @@ export default function CustomerPage() {
   };
 
   const toggleOrder = async (orderId) => {
-    setExpandedOrders(prev => {
-      const newState = { ...prev, [orderId]: !prev[orderId] };
-      if (newState[orderId]) {
-        fetchOrderProducts(orderId);
-      }
-      return newState;
-    });
+   
   };
 
   const openProfile = (customer) => {

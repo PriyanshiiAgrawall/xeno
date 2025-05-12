@@ -113,34 +113,3 @@ Include the customer's name using {{name}}.Don't add [link]. Be polite, include 
 
 
 
-export const generateSummaryMessage = async (req, res) => {
-  const { campaignId } = req.body;
-
-  if (!campaignId) {
-    return res.status(400).json({ error: "Campaign ID is required" });
-  }
-
-  try {
-    
-    const campaign = await Campaign.findById(campaignId).populate("communicationLogs");
-    if (!campaign) {
-      return res.status(404).json({ error: "Campaign not found" });
-    }
-
-    const totalMessages = campaign.communicationLogs.length;
-    const sentMessages = campaign.communicationLogs.filter(log => log.status === 'sent').length;
-    const deliveryRate = totalMessages > 0 ? ((sentMessages / totalMessages) * 100).toFixed(2) : 0;
-
-   
-    const summary = `${campaign.title} reached ${campaign.campaignSize} users. ${sentMessages} messages were delivered with a ${deliveryRate}% delivery rate.`;
-
-    
-    campaign.resultText = summary;
-    await campaign.save();
-
-    res.status(200).json({ message: "Summary generated and saved", summary });
-  } catch (error) {
-    console.error("Error generating campaign summary:", error);
-    res.status(500).json({ error: "Failed to generate summary" });
-  }
-};

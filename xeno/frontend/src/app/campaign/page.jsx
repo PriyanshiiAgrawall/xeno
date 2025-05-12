@@ -71,7 +71,11 @@ export default function CampaignPage() {
                                         <p className="text-xs text-red-600">Failed</p>
                                         <p className="font-semibold text-red-700">{campaign.stats.failed}</p>
                                     </div>
-                                   <p className="text-sm">
+                                   
+
+                                   
+                                </div>
+                                <p className="text-sm">
   <span className="font-medium">Summary:</span>{' '}
   {campaign.resultText ? (
     <span>{campaign.resultText}</span>
@@ -79,9 +83,6 @@ export default function CampaignPage() {
     <span className="text-yellow-600 italic">Pending</span>
   )}
 </p>
-
-                                   
-                                </div>
                             </div>
                         </CardContent>
                     </Card>
