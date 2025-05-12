@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Sparkles } from "lucide-react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 
@@ -37,11 +38,11 @@ const CreateCampaign = ({
     if (res.data?.suggestions) {
       setAiSuggestions(res.data.suggestions);
     } else {
-      alert("AI did not return suggestions.");
+     toast.error("No suggestions returned.");
     }
   } catch (error) {
     console.error("Failed to generate AI suggestions:", error);
-    alert("Failed to generate suggestions. Please try again.");
+    toast.error("Error generating AI suggestions");
   } finally {
     setIsGenerating(false);
   }
@@ -73,13 +74,13 @@ const CreateCampaign = ({
         setCampaignTitle("");
         setMessage("");
         setAiSuggestions([]);
-        alert("Campaign created successfully!");
+        toast.success("Campaign created successfully!");
         // Optionally redirect to campaigns page
         window.location.href = "/campaign";
       }
     } catch (error) {
       console.error("Failed to create campaign:", error);
-      alert(error.response?.data?.message || "Failed to create campaign. Please try again.");
+      toast.error(error.response?.data?.message || "Failed to create campaign. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

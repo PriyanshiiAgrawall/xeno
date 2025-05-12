@@ -420,3 +420,13 @@ export const getAllCampaigns = async (req, res) => {
     res.status(500).json({ message: "Error fetching campaigns", error: error.message });
   }
 };
+
+export default function handler(req, res) {
+  console.log("hit")
+  if (req.isAuthenticated() && req.isAuthenticated()) {
+    return res.status(200).json({ user: req.user });
+  }
+
+  console.log(req.isAuthenticated)
+  return res.status(401).json({ user: null });
+}

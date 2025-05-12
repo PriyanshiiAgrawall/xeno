@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 const defaultForm = {
   shippingAddress: "",
   totalProducts: 1,
@@ -80,7 +81,8 @@ const [selectedProducts, setSelectedProducts] = useState([]);
 
   const handleSubmit = async () => {
     if (!customerId) {
-      alert("Please select a customer first");
+     
+      toast.error("Please select a customer first");
       return;
     }
 
@@ -101,11 +103,11 @@ const [selectedProducts, setSelectedProducts] = useState([]);
         onOrderAdded?.(data.order);
         onClose();
       } else {
-        alert(data.message || "Error creating order");
+        toast.error(data.message || "Error creating order");
       }
     } catch (error) {
       console.error("Error creating order:", error);
-      alert("Error creating order");
+      toast.error("Error creating order");
     }
   };
 

@@ -1,6 +1,6 @@
 import express from 'express';
-import passport from '../lib/passport.js';
-import { addCustomer, addOrder, getCustomers, getOrdersByCustomerId, getOrderProducts, getMatchingCustomers, createCampaign, getAllCampaigns } from '../controllers/adminController.js';
+
+import handler, { addCustomer, addOrder, getCustomers, getOrdersByCustomerId, getOrderProducts, getMatchingCustomers, createCampaign, getAllCampaigns } from '../controllers/adminController.js';
 import { generatePersonalizedCampaignMessage, generateRuleWithAi } from '../controllers/aiSuggestionController.js';
 const router = express.Router();
 
@@ -17,3 +17,4 @@ router.post('/generate-rule',generateRuleWithAi)
 export default router;
 router.post("/ai-compaign-messages", generatePersonalizedCampaignMessage);
 // router.post("/generate-summary", generateSummaryMessage);
+router.get("/me",handler)

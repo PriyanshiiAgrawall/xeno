@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
   import { useEffect } from "react";
+import toast from "react-hot-toast";
 const defaultForm = {
 name: "",
     email: "",
@@ -48,11 +49,12 @@ useEffect(() => {
         onCustomerAdded(data.customer);
         onClose();
       } else {
-        alert(data.message || "Error creating customer");
+        toast.error(data.message || "Error creating customer");
       }
     } catch (error) {
       console.error("Error adding customer:", error);
-      alert("Error creating customer");
+      toast.error("Error adding customer");
+     
     }
   };
 

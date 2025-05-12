@@ -1,15 +1,32 @@
 'use client';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-
+import { useRouter } from 'next/navigation'; 
+import toast from 'react-hot-toast';
 export default function LoginPage() {
+  const router = useRouter();
   const [emailId, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false); 
+useEffect(() => {
+  const checkAuth = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/me`);
+      if (res.status===200) {
+        router.replace('/');
+      }
+    } catch (error) {
+    
+    }
+  };
+  checkAuth();
+}, []);
+
 
   const handleLocalLogin = async () => {
     setLoading(true);
@@ -28,7 +45,7 @@ export default function LoginPage() {
         window.location.href = '/';
       } else {
         const { message } = await res.json();
-        alert(message || 'Login failed');
+       toast.error(message || 'Login failed. Please try again.');
       }
     } catch (err) {
      
@@ -87,20 +104,23 @@ export default function LoginPage() {
 
           <hr className="my-4" />
 
-          {/* Third-Party Login Options */}
-          <Button
-            className="w-full bg-red-500 hover:bg-red-600 text-white"
-            onClick={() => redirectTo('google')}
-          >
-            Login with Google
-          </Button>
+          
+         <Button
+  className="w-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center gap-2"
+  onClick={() => redirectTo('google')}
+>
+  <FaGoogle size={20} />
+  Login with Google
+</Button>
 
-          <Button
-            className="w-full bg-black hover:bg-gray-900 text-white"
-            onClick={() => redirectTo('github')}
-          >
-            Login with GitHub
-          </Button>
+<Button
+  className="w-full bg-black hover:bg-gray-900 text-white flex items-center justify-center gap-2"
+  onClick={() => redirectTo('github')}
+>
+  <FaGithub size={20} />
+  Login with GitHub
+</Button>
+
 
           {/* Demo Login Button */}
           <Button

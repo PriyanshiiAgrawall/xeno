@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import CreateCampaign from "./createCampaign";
 import PreviewModal from "./previewModal";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function GenerateRuleAI({ onGenerateRule }) {
   const [input, setInput] = useState("");
@@ -23,11 +24,11 @@ export default function GenerateRuleAI({ onGenerateRule }) {
       setGeneratedRule(res.data.rule);
       onGenerateRule(res.data.rule);
     } else {
-      alert("No rule returned.");
+      toast.error("No rule generated");
     }
   } catch (error) {
     console.error("Failed to generate rule:", error);
-    alert("Error generating rule");
+    toast.error("Error generating rule");
   }
 };
 
