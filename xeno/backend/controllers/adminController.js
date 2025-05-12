@@ -3,7 +3,7 @@ import Order from "../models/order.js";
 import Campaign from "../models/Campaign.js";
 import CommunicationLog from "../models/CommunicationLog.js";
 import { generateSummaryMessage } from "./aiSuggestionController.js";
-import customer from "../models/customer.js";
+
 
 
 
