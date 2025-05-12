@@ -9,14 +9,9 @@ const OrderSchema = new mongoose.Schema(
         },
 
         orderDate: { type: Date, default: Date.now },
-        products: [
-            {
-                productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
-                quantity: { type: Number, required: true },
-                price: { type: Number, required: true },
-                totalPrice: { type: Number, required: true },//(quantity * price)
-            }
-        ],
+        products: [{
+            type: String,
+        }],
         totalProducts: { type: Number, required: true },
         totalAmount: { type: Number, required: true },
         shippingAddress: {
@@ -28,7 +23,6 @@ const OrderSchema = new mongoose.Schema(
             enum: ['Processing', 'Shipped', 'Delivered', 'Cancelled'],
             default: 'Processing'
         },
-        deliveryDate: { type: Date, default: null },
     },
     {
         timestamps: true,

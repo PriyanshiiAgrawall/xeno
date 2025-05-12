@@ -6,12 +6,7 @@ const CampaignSchema = new mongoose.Schema(
 
         campaignSize: { type: Number, required: true },
 
-        createdBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Admin",
-            required: true,
-        },
-
+       
         rulesJSON: { type: Object, required: true, default: {} },
 
         segmentText: { type: String, required: true }, // Text description of segment which ai will convert to json
