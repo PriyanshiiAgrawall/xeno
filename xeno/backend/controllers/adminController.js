@@ -1,4 +1,4 @@
-import Customer from "../models/customer.js";
+import Customer from "../models/Customer.js";
 import Order from "../models/order.js";
 import Campaign from "../models/Campaign.js";
 import CommunicationLog from "../models/CommunicationLog.js";
@@ -218,7 +218,7 @@ export const getMatchingCustomers = async (req, res) => {
 // Create Campaign Controller
 export const createCampaign = async (req, res) => {
   try {
-  
+
     const { campaignTitle, message, query } = req.body;
     console.log(campaignTitle, message, query)
     let mongoQuery = {};
@@ -267,28 +267,28 @@ export const createCampaign = async (req, res) => {
     try {
       const communicationLogs = [];
       for (const customer of matchingCustomers) {
-  const personalizedMessage = message.includes("{{name}}")
-    ? message.replace("{{name}}", customer.name)
-    : message;
+        const personalizedMessage = message.includes("{{name}}")
+          ? message.replace("{{name}}", customer.name)
+          : message;
 
-  const log = new CommunicationLog({
-    customer: customer._id,
-    campaign: campaign._id,
-    message: personalizedMessage,
-    status: 'pending'
-  });
+        const log = new CommunicationLog({
+          customer: customer._id,
+          campaign: campaign._id,
+          message: personalizedMessage,
+          status: 'pending'
+        });
 
-  await log.save();
-  communicationLogs.push(log._id);
+        await log.save();
+        communicationLogs.push(log._id);
 
-  
-  await Customer.findByIdAndUpdate(customer._id, {
-    $push: {
-      campaigns: campaign._id,
-      communicationLogs: log._id,
-    },
-  });
-}
+
+        await Customer.findByIdAndUpdate(customer._id, {
+          $push: {
+            campaigns: campaign._id,
+            communicationLogs: log._id,
+          },
+        });
+      }
 
       // Update customers with campaign reference
       await Customer.updateMany(
@@ -297,34 +297,34 @@ export const createCampaign = async (req, res) => {
       );
 
       // Simulate message sending with random delays and statuses
-    setTimeout(async () => {
-  const logs = await CommunicationLog.find({ campaign: campaign._id });
-
-  const statusPromises = logs.map(log => {
-    return new Promise((resolve) => {
-      const delay = Math.floor(Math.random() * 4000) + 1000;
       setTimeout(async () => {
-        const status = Math.random() < 0.8 ? 'sent' : 'failed';
-        log.status = status;
-        await log.save();
-        resolve(); // mark this log as done
-      }, delay);
-    });
-  });
+        const logs = await CommunicationLog.find({ campaign: campaign._id });
 
-  // Wait for all statuses to be updated
-  Promise.all(statusPromises)
-    .then(async () => {
-      console.log("All messages processed. Now generating summary.");
-      await generateSummaryMessage(campaign._id); //  call your summary generator
-    })
-    .catch(error => {
-      console.error("Error processing message statuses:", error);
-    });
-}, 1000);
+        const statusPromises = logs.map(log => {
+          return new Promise((resolve) => {
+            const delay = Math.floor(Math.random() * 4000) + 1000;
+            setTimeout(async () => {
+              const status = Math.random() < 0.8 ? 'sent' : 'failed';
+              log.status = status;
+              await log.save();
+              resolve(); // mark this log as done
+            }, delay);
+          });
+        });
+
+        // Wait for all statuses to be updated
+        Promise.all(statusPromises)
+          .then(async () => {
+            console.log("All messages processed. Now generating summary.");
+            await generateSummaryMessage(campaign._id); //  call your summary generator
+          })
+          .catch(error => {
+            console.error("Error processing message statuses:", error);
+          });
+      }, 1000);
 
 
-  
+
     } catch (error) {
       console.error("Error creating communication logs:", error);
     }
@@ -372,7 +372,7 @@ const generateSegmentDescription = (query) => {
 
 export const getAllCampaigns = async (req, res) => {
   try {
-      console.log("hello")
+    console.log("hello")
     const campaigns = await Campaign.find()
       .populate("communicationLogs")
       .sort({ createdAt: -1 });
