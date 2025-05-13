@@ -2,9 +2,17 @@
 
 A full-stack Customer Relationship Management System where **admins can manage customers, segment them using advanced rules or AI text input**, and create personalized campaigns with communication logs and AI-generated summaries.
 
-**Live Demo:** [Video](https://drive.google.com/drive/u/3/folders/16CKjkDSaOeFKgyF6b7IXQI-mh0GE9Hbb)
-**Flowchart** [Diagram](https://drive.google.com/file/d/1r411F3DcPOmHL8Pg5bQMgMPlnVoXotbX/view?usp=drive_link)  
-**Tech Stack:** Next.js 15, Node.js, Express.js, MongoDB, Tailwind CSS, Shadcn UI, Google Generative AI, Passport, React hot toast.
+## 🌐 Deployment
+
+🔗 [Live CRM App](https://xeno-crm-wo6w.onrender.com/)
+
+## 🚀 Live Demo
+
+📹 [Video Walkthrough](https://drive.google.com/drive/u/3/folders/16CKjkDSaOeFKgyF6b7IXQI-mh0GE9Hbb)
+
+## 🧭 Flowchart
+
+📊 [System Diagram](https://drive.google.com/file/d/1r411F3DcPOmHL8Pg5bQMgMPlnVoXotbX/view?usp=drive_link)
 
 ---
 
@@ -132,3 +140,11 @@ npm run dev
 | jsonwebtoken, bcrypt                                                | JWT + password hashing    |
 | Google Gemini API                                                   | AI integration            |
 | dotenv, cors                                                        | Config and CORS           |
+
+## Backend Deployed Url
+
+https://connect-crm-backend.onrender.com/
+
+## Frontend Deployed Url
+
+https://xeno-crm-wo6w.onrender.com/
