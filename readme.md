@@ -12,7 +12,7 @@ A full-stack Customer Relationship Management System where **admins can manage c
 
 ## 🧭 Flowchart
 
-📊 [System Diagram](https://drive.google.com/file/d/1r411F3DcPOmHL8Pg5bQMgMPlnVoXotbX/view?usp=drive_link)
+📊 [System Diagram](https://res.cloudinary.com/dop7kjln7/image/upload/v1747167527/gk2uvgoqhkjgs2uwxtf5.jpg)
 
 ---
 
