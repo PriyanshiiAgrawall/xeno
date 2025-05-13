@@ -1,5 +1,5 @@
 import Customer from "../models/Customer.js";
-import Order from "../models/order.js";
+import Order from "../models/Order.js";
 import Campaign from "../models/Campaign.js";
 import CommunicationLog from "../models/CommunicationLog.js";
 import generateSummaryMessage from "../lib/summaryMessage.js";
