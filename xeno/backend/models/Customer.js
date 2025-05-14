@@ -21,7 +21,7 @@ const CustomerSchema = new mongoose.Schema(
         communicationLogs: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'CommunicationLogs',
+                ref: 'CommunicationLog',
             }
         ],
         campaigns: [

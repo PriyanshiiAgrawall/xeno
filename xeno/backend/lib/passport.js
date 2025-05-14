@@ -5,6 +5,7 @@ import { Strategy as GitHubStrategy } from 'passport-github2';
 import bcrypt from 'bcrypt';
 import Admin from '../models/Admin.js';
 
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -41,6 +42,7 @@ passport.use(
         },
         async (emailId, password, done) => {
             try {
+               
                 let user = await Admin.findOne({ emailId });
 
                 if (!user) {
@@ -74,7 +76,7 @@ passport.use(
                 if (!isMatch) {
                     return done(null, false, { message: 'Invalid credentials' });
                 }
-
+                console.log("printing",user)
                 // Success
                 return done(null, user);
             } catch (err) {

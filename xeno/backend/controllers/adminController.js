@@ -421,11 +421,32 @@ export const getAllCampaigns = async (req, res) => {
 };
 
 export default function handler(req, res) {
-  console.log("hit")
-  if (req.isAuthenticated() && req.isAuthenticated()) {
-    return res.status(200).json({ user: req.user });
+  try {
+    console.log("hit");
+    if (req.isAuthenticated?.()) {
+      console.log("authenticated user: ", req.user);
+      return res.status(200).json({ user: req.user });
+    }
+    console.log("user: ",req.session)
+    return res.status(401).json({ user: null, message: "Not authenticated" });
+  } catch (error) {
+    console.error("Handler error: ", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
+}
 
-  console.log(req.isAuthenticated)
-  return res.status(401).json({ user: null });
+
+export  const  logoutHandler  = function(req, res) {
+  try {
+   req.logout(function(err) {
+  if (err) {
+    return next(err);
+  }
+  res.status(200).json({ message: "Logged out" });
+});
+   
+  } catch (error) {
+    console.error("Handler error: ", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 }

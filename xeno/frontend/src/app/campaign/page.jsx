@@ -12,7 +12,9 @@ export default function CampaignPage() {
     useEffect(() => {
         const fetchCampaigns = async () => {
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/get-all-campaigns`)
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/get-all-campaigns`,{
+        method: 'GET',
+        credentials: 'include',})
                 const data = await response.json();
                 setCampaigns(data);
             } catch (error) {

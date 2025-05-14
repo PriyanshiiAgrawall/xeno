@@ -21,10 +21,12 @@ const navItems = [
 export default function Sidebar() {
   const router = useRouter();
 
-  const handleLogout = () => {
-    // Clear cookies/localStorage if needed
-    // Then redirect
-    router.push('/login');
+  const handleLogout = async function() {
+   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/logout`,{
+          method: 'GET',
+          credentials: 'include', 
+        });
+   router.push('/login');
   };
 
   return (

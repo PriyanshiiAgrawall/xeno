@@ -13,39 +13,27 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false); 
-useEffect(() => {
-  const checkAuth = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/me`);
-      if (res.status===200) {
-        router.replace('/');
-      }
-    } catch (error) {
-    
-    }
-  };
-  checkAuth();
-}, []);
+
 
 
   const handleLocalLogin = async () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
+     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
         method: 'POST',
-       
+        credentials: 'include', 
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ emailId, password }),
-      });
+        body: JSON.stringify({ emailId, password }),
+      });
 
       if (res.ok) {
         window.location.href = '/';
       } else {
         const { message } = await res.json();
-       toast.error(message || 'Login failed. Please try again.');
+     
       }
     } catch (err) {
      
