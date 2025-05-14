@@ -22,7 +22,7 @@ A full-stack Customer Relationship Management System where **admins can manage c
 
 - Admin logs in via Google, GitHub, or credentials (using Passport.js).
 
-### 2. 👥 Add Customers (`/add`)
+### 2. 👥 Add Customers (`/customer`)
 
 - Admin can:
   - Add customers via a form
@@ -69,6 +69,17 @@ A full-stack Customer Relationship Management System where **admins can manage c
 | Google Generative AI | Campaign summaries, segment rule generation, personalized message suggestions |
 
 ---
+
+## 📸Demo Images
+
+![Login Page](https://res.cloudinary.com/dop7kjln7/image/upload/v1747258795/lxkjqy2lnu17sswfryai.png)
+![Home Page](https://res.cloudinary.com/dop7kjln7/image/upload/v1747258870/f5fbqidw2k4gnjcshzbl.png)
+![Customers and Orders](https://res.cloudinary.com/dop7kjln7/image/upload/v1747263517/jzsvompriuy1zcgmitaz.png)
+![Rule Builder](https://res.cloudinary.com/dop7kjln7/image/upload/v1747263596/jytqrmeo0nxzd24nboby.png)
+![Matching Customers Preview](https://res.cloudinary.com/dop7kjln7/image/upload/v1747263660/q2xz574ff8mx2dqypnm3.png)
+![Create Campaign With AI](https://res.cloudinary.com/dop7kjln7/image/upload/v1747263717/ovgwcpsjofdgtbw3zpvc.png)
+![Generate Rule with AI](https://res.cloudinary.com/dop7kjln7/image/upload/v1747263761/tnxcmt4oinkd77wcrwm3.png)
+![Campaign Page](https://res.cloudinary.com/dop7kjln7/image/upload/v1747264185/yppkspn9eofrsbeqcwxv.png)
 
 ## 💡 Smart Segmentation UX
 
