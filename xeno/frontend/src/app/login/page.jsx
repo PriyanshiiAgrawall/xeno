@@ -47,6 +47,7 @@ export default function LoginPage() {
   };
 
   const redirectTo = (provider) => {
+    console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/${provider}`)
     window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/${provider}`;
   };
 

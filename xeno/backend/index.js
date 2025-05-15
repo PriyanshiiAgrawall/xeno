@@ -56,8 +56,8 @@ app.get('/api/auth/google', passport.authenticate('google', {
 }));
 
 app.get('/api/auth/callback/google', passport.authenticate('google', {
-  failureRedirect: '/login',
-  successRedirect: '/'
+  failureRedirect: `${process.env.FRONTEND_URL}/login`,
+  successRedirect: `${process.env.FRONTEND_URL}/`
 }));
 
 app.get('/api/auth/github', passport.authenticate('github', {
@@ -65,8 +65,8 @@ app.get('/api/auth/github', passport.authenticate('github', {
 }));
 
 app.get('/api/auth/callback/github', passport.authenticate('github', {
-  failureRedirect: '/login',
-  successRedirect: '/'
+  failureRedirect: `${process.env.FRONTEND_URL}/login`,
+  successRedirect: `${process.env.FRONTEND_URL}/`
 }));
 
 app.get('/api/auth/status', (req, res) => {
