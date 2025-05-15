@@ -13,8 +13,9 @@ passport.use(new GoogleStrategy({
 },
     async (accessToken, refreshToken, profile, done) => {
         try {
+            
             const existingAdmin = await Admin.findOne({ emailId: profile.emails[0].value });
-
+            console.log("here",profile)
             if (existingAdmin) {
                 return done(null, existingAdmin);
             }
