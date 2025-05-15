@@ -1,18 +1,18 @@
 'use client';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 export default function LoginPage() {
   const router = useRouter();
   const [emailId, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
 
 
@@ -20,26 +20,30 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/login`, {
         method: 'POST',
-        credentials: 'include', 
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ emailId, password }),
-      });
+        body: JSON.stringify({ emailId, password }),
+      });
+
+      console.log('Login response:', res);
+      const data = await res.json();
+      console.log('Login data:', data);
 
       if (res.ok) {
-       router.push('/')
+        router.push('/');
       } else {
-        const { message } = await res.json();
-     
+        const { message } = data;
+        toast.error(message || 'Login failed. Please try again.');
       }
     } catch (err) {
-     
+      console.error('Login error:', err);
     } finally {
       setLoading(false);
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   };
 
@@ -92,22 +96,22 @@ export default function LoginPage() {
 
           <hr className="my-4" />
 
-          
-         <Button
-  className="w-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center gap-2"
-  onClick={() => redirectTo('google')}
->
-  <FaGoogle size={20} />
-  Login with Google
-</Button>
 
-<Button
-  className="w-full bg-black hover:bg-gray-900 text-white flex items-center justify-center gap-2"
-  onClick={() => redirectTo('github')}
->
-  <FaGithub size={20} />
-  Login with GitHub
-</Button>
+          <Button
+            className="w-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center gap-2"
+            onClick={() => redirectTo('google')}
+          >
+            <FaGoogle size={20} />
+            Login with Google
+          </Button>
+
+          <Button
+            className="w-full bg-black hover:bg-gray-900 text-white flex items-center justify-center gap-2"
+            onClick={() => redirectTo('github')}
+          >
+            <FaGithub size={20} />
+            Login with GitHub
+          </Button>
 
 
           {/* Demo Login Button */}

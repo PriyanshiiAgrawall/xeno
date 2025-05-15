@@ -11,7 +11,7 @@ import cookieParser from 'cookie-parser';
 
 
 const app = express();
-
+app.set("trust proxy", 1);
 // Middlewares
 app.use(cors({
   origin: `${process.env.FRONTEND_URL}`,
@@ -69,7 +69,23 @@ app.get('/auth/github/callback', passport.authenticate('github', {
   successRedirect: '/'
 }));
 
-
+app.get('/api/auth/status', (req, res) => {
+  console.log('Session:', req.session);
+  console.log('User:', req.user);
+  if (req.isAuthenticated()) {
+    res.json({
+      authenticated: true,
+      user: {
+        id: req.user._id,
+        emailId: req.user.emailId,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName
+      }
+    });
+  } else {
+    res.json({ authenticated: false });
+  }
+});
 
 app.get('/', (req, res) => {
   res.send('Server running...');
