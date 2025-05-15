@@ -37,7 +37,6 @@ export default function LoginPage() {
         router.push('/');
       } else {
         const { message } = data;
-        toast.error(message || 'Login failed. Please try again.');
       }
     } catch (err) {
       console.error('Login error:', err);
