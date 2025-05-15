@@ -30,7 +30,7 @@ export default function LoginPage() {
       });
 
       if (res.ok) {
-        window.location.href = '/';
+       router.push('/')
       } else {
         const { message } = await res.json();
      

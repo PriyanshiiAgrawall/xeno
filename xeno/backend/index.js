@@ -14,22 +14,22 @@ const app = express();
 
 // Middlewares
 app.use(cors({
-    origin: `${process.env.FRONTEND_URL}`,
-    credentials:true,
+  origin: `${process.env.FRONTEND_URL}`,
+  credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser())
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        secure:false,
-        sameSite: "none",
-    }
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    sameSite: 'none'
+  }
 }));
 
 app.use(cookieParser())
@@ -44,11 +44,11 @@ app.post('/login', (req, res, next) => {
 
     req.logIn(user, (err) => {
       if (err) return next(err);
-      
+
       // At this point, user is stored in session
       return res.status(200).json({ user });
     });
-  })(req, res, next);
+  })(req, res, next);
 });
 
 app.get('/auth/google', passport.authenticate('google', {
@@ -72,7 +72,7 @@ app.get('/auth/github/callback', passport.authenticate('github', {
 
 
 app.get('/', (req, res) => {
-    res.send('Server running...');
+  res.send('Server running...');
 });
 
 const Port = process.env.PORT || 3001;
@@ -85,10 +85,10 @@ app.use('/admin', router);
 
 
 const server = () => {
-    dbConnect();
-    app.listen(Port, () => {
-        console.log("Listening to port", Port);
-    });
+  dbConnect();
+  app.listen(Port, () => {
+    console.log("Listening to port", Port);
+  });
 };
 
 server();
