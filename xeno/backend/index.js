@@ -51,7 +51,7 @@ app.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-app.get('/auth/google', passport.authenticate('google', {
+app.get('/api/auth/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 
@@ -60,7 +60,7 @@ app.get('/api/auth/callback/google', passport.authenticate('google', {
   successRedirect: '/'
 }));
 
-app.get('/auth/github', passport.authenticate('github', {
+app.get('/api/auth/github', passport.authenticate('github', {
   scope: ['user:email']
 }));
 
