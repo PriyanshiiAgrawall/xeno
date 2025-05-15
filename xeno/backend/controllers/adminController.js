@@ -425,7 +425,7 @@ export default function handler(req, res) {
     console.log("hit");
     if (req.isAuthenticated?.()) {
       console.log("authenticated user: ", req.user);
-      return res.redirect(`${FRONTEND_URL}`).status(200);
+      return res.status(200).json({user: req.user})
     }
     console.log("user: ",req.session)
     return res.status(401).json({ user: null, message: "Not authenticated" });
